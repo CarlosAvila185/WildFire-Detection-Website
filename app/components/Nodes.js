@@ -1,8 +1,8 @@
 //This is the page that will retrieve the node coords from firebase
 
 const nodes = [
-  { id: 1, name: 'Sensor A', coords: [50.678, -120.330] },
-  { id: 2, name: 'Sensor B', coords: [50.670, -120.340] },
+  { id: '01', name: 'Node 01', coords: [50.67, -120.34] },
+  { id: '02', name: 'Node 02', coords: [50.68, -120.32] },
 ]
 
 export default nodes;

@@ -1,19 +1,41 @@
 @import "tailwindcss";
 
-@keyframes pulse {
-  0%   { transform: scale(0.6); opacity: 0.8; }
-  50%  { transform: scale(1.2); opacity: 0.2; }
-  100% { transform: scale(0.6); opacity: 0.8; }
-}
+/* globals.css (or wherever you put your global marker styles) */
 
+/* 1) drop the old “pulse” animation on the dot */
 .pulse-marker {
   width: 16px;
   height: 16px;
-  background-color: #f00;
+  background: #DC143C;      /* permanent crimson dot */
   border-radius: 50%;
-  animation: pulse 2s ease-out infinite;
-  /* center the “dot” under the location */
   margin-left: -8px;
   margin-top: -8px;
+  box-shadow: none;         /* no ring by default */
+  animation: none;          /* dot itself never animates */
+}
+
+/* 2) define a ring‐only keyframe */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220,20,60, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(220,20,60, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220,20,60, 0);
+  }
+}
+
+/* 3) when online, animate only the ring */
+.pulse-marker.pulse-online {
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+/* 4) offline is just a static gray dot */
+.pulse-marker.pulse-offline {
+  background: #888;
+  box-shadow: none;
+  animation: none;
 }
 
