@@ -6,7 +6,8 @@ import {
   TileLayer,
   Circle,
   CircleMarker,
-  Popup
+  Popup,
+  Marker
 } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -18,6 +19,19 @@ import { ref, onValue } from 'firebase/database';
 export default function KamloopsMap() {
   const [nodes, setNodes] = useState([]);
   const center = [50.6745, -120.3273];
+  const dataCenter = [50.64905741054284, -120.34698321895848];
+  const houseIcon = L.icon({
+    iconUrl: '/dataCenter.png',
+    iconSize: [40, 50],
+    iconAnchor: [12, 41],
+    popupAnchor: [10, -41],
+  });
+  const loraIcon = L.icon({
+    iconUrl: '/Lora.png',
+    iconSize: [50, 50],
+    iconAnchor: [12, 41],
+    popupAnchor: [5, -31],
+  });
 
   useEffect(() => {
     const unsub = onValue(ref(db, 'nodes'), snap => {
@@ -61,6 +75,18 @@ export default function KamloopsMap() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"
       />
+
+      <Marker position={dataCenter} icon={houseIcon}>
+        <Popup>
+          This is the Data Center of the Nodes.
+        </Popup>
+      </Marker>
+
+      <Marker position={center} icon={loraIcon}>
+        <Popup>
+          This is the Lora-Zygbee Converter
+        </Popup>
+      </Marker>
 
       {nodes.map((node) => {
         const now = Date.now();
