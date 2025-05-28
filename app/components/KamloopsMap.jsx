@@ -47,6 +47,21 @@ export default function KamloopsMap() {
             : null;
         const lastNum = stamped != null ? Number(stamped) : null;
 
+        // Normalize previousUpdated
+      const prevStamped =
+        d.previous_updated ?? 
+        d.previousUpdated  ?? 
+        null;
+
+        const prevNum = prevStamped != null
+        ? Number(prevStamped)
+        : null;
+
+      // Grab the delay field (if your function writes it)
+      const delayMs = d.delay != null
+        ? Number(d.delay)
+        : null;
+
         return {
           ...n,
           temperature:
