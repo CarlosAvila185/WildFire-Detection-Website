@@ -52,6 +52,8 @@ export default function KamloopsMap() {
           temperature:
             d.temperature != null ? Number(d.temperature) : null,
           lastUpdated: lastNum,
+          previousUpdated: prevNum,
+          delay: delayMs
         };
       });
 
@@ -114,7 +116,12 @@ export default function KamloopsMap() {
               }
               {node.lastUpdated && (
                 <div style={{ fontSize: '0.8em', marginTop: 4 }}>
-                  Last update: {new Date(node.lastUpdated).toLocaleTimeString()}
+                  Last update: {new Date(node.lastUpdated).toLocaleTimeString()}<br/>
+                  {node.previousUpdated && `Prev update: ${new Date(node.previousUpdated).toLocaleTimeString()}`
+                  }<br/>
+                {node.delay != null &&
+                  `Delay: ${(node.delay / 1000).toFixed(1)}s`
+                }
                 </div>
               )}
             </Popup>
