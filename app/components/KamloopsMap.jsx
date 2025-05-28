@@ -101,7 +101,7 @@ export default function KamloopsMap() {
 
       <Marker position={center} icon={loraIcon}>
         <Popup>
-          This is the Lora-Zygbee Converter
+          This is the Lora-Zigbee Converter
         </Popup>
       </Marker>
 
@@ -109,7 +109,7 @@ export default function KamloopsMap() {
         const now = Date.now();
         const isOnline =
           node.lastUpdated != null &&
-          now - node.lastUpdated < 5 * 60 * 1000; // 5 min
+          now - node.lastUpdated < 1 * 60 * 1000; // 5 min
 
         return (
           <CircleMarker
